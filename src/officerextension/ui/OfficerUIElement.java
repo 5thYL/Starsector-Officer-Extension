@@ -1,12 +1,15 @@
 package officerextension.ui;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.OfficerDataAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.plugins.OfficerLevelupPlugin;
 import com.fs.starfarer.api.ui.ButtonAPI;
 import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.ui.UIComponentAPI;
 import com.fs.starfarer.coreui.CaptainPickerDialog;
 import officerextension.CoreScript;
+import officerextension.Settings;
 import officerextension.Util;
 import officerextension.UtilReflection;
 
@@ -20,6 +23,7 @@ public class OfficerUIElement extends UIPanel {
     private Button forgetSkillsButton;
     private Button suspendButton;
     private Button reinstateButton;
+    private Button increaseLevelCapButton;
     private List<SkillButton> wrappedSkillButtons;
     private final CoreScript injector;
 
@@ -179,6 +183,10 @@ public class OfficerUIElement extends UIPanel {
         suspendButton = button;
     }
 
+    public void setIncreaseLevelCapButton(Button button) { increaseLevelCapButton = button; }
+
+    public Button getIncreaseLevelCapButtonButton() { return increaseLevelCapButton; }
+
     public List<SkillButton> getWrappedSkillButtons() {
         return wrappedSkillButtons;
     }
@@ -331,6 +339,7 @@ public class OfficerUIElement extends UIPanel {
             }
         }
 
+
         // Also, level up takes precedence; if an officer is able to level up he won't be able to forget skills
         // Show forget button, hide level up button
         if (getOfficerData().canLevelUp()) {
@@ -356,6 +365,15 @@ public class OfficerUIElement extends UIPanel {
             getForgetSkillsButton().setOpacity(0f);
             getSuspendButton().setOpacity(1f);
             getReinstateButton().setOpacity(0f);
+        }
+        OfficerLevelupPlugin levelUpPlugin = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
+        //If officer is not at maximum level, do not show increase level cap button
+        if(getOfficerData().getPerson().getStats().getLevel() == levelUpPlugin.getMaxLevel(getOfficerData().getPerson())
+        && levelUpPlugin.getMaxLevel(getOfficerData().getPerson()) < Settings.ARBITRARY_LEVEL_CAP){
+            getIncreaseLevelCapButtonButton().setOpacity(1f);
+        }
+        else {
+            getIncreaseLevelCapButtonButton().setOpacity(0f);
         }
     }
 
