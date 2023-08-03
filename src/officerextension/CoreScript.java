@@ -340,6 +340,8 @@ public class CoreScript implements EveryFrameScript {
         insertReinstateButton(elem);
         insertEditTagsButton(elem);
 
+        insertIncreaseLevelCapButton(elem);
+
         elem.getDismissButton().setListener(new DismissOfficer(elem));
 
         elem.updateButtonVisibility();
@@ -399,6 +401,19 @@ public class CoreScript implements EveryFrameScript {
         );
     }
 
+    /** Adds and overlays the "Increase Level Cap" button on top of the "Mentor" button. */
+    private void insertIncreaseLevelCapButton(OfficerUIElement elem) {
+        elem.setIncreaseLevelCapButton(
+                insertButtonOnTopOfMentor(
+                        elem,
+                        "Increase Level Cap",
+                        Misc.getStoryOptionColor(),
+                        Misc.getStoryDarkColor(),
+                        new IncreaseLevelCap(elem)
+                )
+        );
+    }
+
     /** Adds and overlays the "Edit tags" button to the left of the XP bar. */
     private void insertEditTagsButton(OfficerUIElement elem) {
             insertButtonAtPosition(
@@ -433,6 +448,10 @@ public class CoreScript implements EveryFrameScript {
     /** Overlays the specified button on top of the "Level up!" button. */
     private Button insertButtonOnTopOfLevelUp(OfficerUIElement elem, String text, Color base, Color bg, ActionListener listener) {
         return insertButtonAtPosition(elem, text, base, bg, listener, 100f, 20f,110f, 7f);
+    }
+
+    private Button insertButtonOnTopOfMentor(OfficerUIElement elem, String text, Color base, Color bg, ActionListener listener) {
+        return insertButtonAtPosition(elem, text, base, bg, listener, 203f, 20f,7f, 80f);
     }
 
     private CaptainPickerDialog findCaptainPickerDialog() {

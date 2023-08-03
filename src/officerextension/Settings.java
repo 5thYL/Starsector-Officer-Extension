@@ -12,12 +12,14 @@ public class Settings {
     public static float SUSPENDED_SALARY_FRACTION;
     public static int DEMOTE_OFFICER_SP_COST;
     public static float DEMOTE_BONUS_XP_FRACTION;
+    public static int ARBITRARY_LEVEL_CAP;
+    public static String OFFICER_LEVEL_CAP = "$officerextension_Officer_Level_Cap";
+    public static float INCREASE_LEVEL_CAP_BONUS_XP_FRACTION;
     public static float FORGET_ELITE_BONUS_XP_FRACTION;
-    public static float SUSPEND_OFFICER_COST_MULTIPLIER;
+    public static float SUSPEND_OFFICER_COST_MULTIPLIER;;
     public static boolean SHOW_COMMANDER_SKILLS;
     public static boolean SPLIT_COMMANDER_SKILLS;
     public final static Set<String> PERSISTENT_OFFICER_TAGS = new TreeSet<>();
-
     /** Unused -- only used pre 0.4.0 */
     public static final String SUSPENDED_OFFICERS_DATA_KEY = "officerextension_SuspendedOfficers";
 
@@ -31,6 +33,8 @@ public class Settings {
             SUSPENDED_SALARY_FRACTION = (float) json.getDouble("suspendedOfficerMonthlySalaryFraction");
             DEMOTE_OFFICER_SP_COST = json.getInt("demoteOfficerSPCost");
             DEMOTE_BONUS_XP_FRACTION = (float) json.getDouble("demoteOfficerBonusXPFraction");
+            ARBITRARY_LEVEL_CAP = json.getInt("arbitraryLevelCap");
+            INCREASE_LEVEL_CAP_BONUS_XP_FRACTION = (float) json.getDouble("increaseLevelCapBonusXPFraction");
             FORGET_ELITE_BONUS_XP_FRACTION = (float) json.getDouble("forgetEliteSkillBonusXPFraction");
             SUSPEND_OFFICER_COST_MULTIPLIER = (float) json.getDouble("suspendOfficerCostMultiplier");
             SHOW_COMMANDER_SKILLS = json.getBoolean("shouldShowFleetCommanderSkills");
