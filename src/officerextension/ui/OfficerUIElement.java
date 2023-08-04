@@ -368,7 +368,7 @@ public class OfficerUIElement extends UIPanel {
         }
         OfficerLevelupPlugin levelUpPlugin = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
         //If officer is not at maximum level, do not show increase level cap button
-        if(getOfficerData().getPerson().getStats().getLevel() == levelUpPlugin.getMaxLevel(getOfficerData().getPerson())
+        if(getOfficerData().getPerson().getStats().getLevel() >= levelUpPlugin.getMaxLevel(getOfficerData().getPerson())
         && levelUpPlugin.getMaxLevel(getOfficerData().getPerson()) < Settings.ARBITRARY_LEVEL_CAP){
             getIncreaseLevelCapButtonButton().setOpacity(1f);
         }
