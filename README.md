@@ -4,39 +4,19 @@ A Starsector mod that officers additional functionality for managing officers.
 
 This edition adds the ability to increase level cap for individual ~~waifus~~officers using storypoints.
 
-Will probably die out soon as I'm looking for ways to make this a submod of OE rather than a fork.
+Will probably die out soon as I'm looking for ways to make this a submod of OE rather than a fork. - scratch this, I can't access the private classes with my own subclass, so this will simply not happen.
 
-## Manage more officers
+## List o Credits
 
-- Manage as many officers as you'd like. Hire new officers regardless of how many are currently under your command.
-- The 8 officer limit (10 with officer management) still applies -- however, it only applies to officers in command of a ship. Officers not in command of a ship do not count toward your officer limit.
+Since I'm literally just a copy and paste bot when it comes to modding, this fork is literally a compilation of everyone's work on discord. Credits are in chronological order.
 
-## Suspend officers
+- float for the original mod, of course! [At least that's what they're called on the forum]
+- ruddygreat for working out the basics of modding with me
+- Lukas04 for the enlightments into the depths of SS reflections
+- AtlanticAccent for working through a ton of stuff with me that I can write a book on probably, also the conversations kept me sane
+- Starficz for the life saving Intelli search hotkeys
+- AERO for recommending me to do a submod instead of a fork
+- Histidine for telling me the idea above is impossible for OR
+- superyuuki for pointing me to some crazy lib that supposedly can make a submod but I don't understand at all so I gave up
 
-- Suspend officers in your fleet for an upfront fee equal to twelve times their monthly salary.
-- Suspended officers cannot be assigned to any ship and must be paid 10% of their standard salary.
-- Suspended officers can be reinstated at any time for no cost.
-- Does not apply to mercenaries or AI cores.
-
-## Demote officers
-
-- Demote officers by selecting skills for them to forget. Forgetting skills causes an officer to lose levels equal to the number of skills forgotten.
-- Demoting an officer requires a story point and grants 100% bonus experience.
-- Officers cannot be demoted below level 1. 
-- Does not apply to mercenaries or AI cores.
-
-## Additional menu options
-
-- Undo your most recent assignments. This may fail if you suspend, dismiss, or fully integrate officers or AI cores beforehand.
-- Filter officers by skills or by custom user-defined tags. Officers that don't have the selected skills or tags will be hidden from the selection panel.
-- Sort officers, which will sort officers in your fleet in the following order: unassigned mercenaries, assigned mercenaries, unassigned non-mercenary officers, assigned non-mercenary officers, suspended officers. Officers in the same category are sorted by level, followed by name.
-
-## Miscellaneous QoL
-
-- Sorts officer payroll in the income tab by pay, followed by officer name for officers with equal pay. This applies to suspended officers as well.
-- Upon interacting with another fleet, displays that fleet's commander's combat skills, including fleet-wide skills.
-- Level 7 cryopod officers will maintain their maximum level and number of elite skills even if you demote them or remove their elite skills via the retrain option. Like normal officers, they can no longer be retrained if they have fewer than their maximum allowed number of elite skills.
-
-## Additional notes
-
-- Safe to add to or remove from an existing save file.
+So yeah, thanks a lot guys!
