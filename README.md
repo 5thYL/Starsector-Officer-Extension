@@ -18,5 +18,6 @@ Since I'm literally just a copy and paste bot when it comes to modding, this for
 - AERO for recommending me to do a submod instead of a fork
 - Histidine for telling me the idea above is impossible for OR
 - superyuuki for pointing me to some crazy lib that supposedly can make a submod but I don't understand at all so I gave up
+- and everone who beared with my spamming of the modding channel
 
 So yeah, thanks a lot guys!
