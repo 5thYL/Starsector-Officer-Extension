@@ -1,7 +1,9 @@
 # Officer Extension - The OP Edition
 
 A Starsector mod that officers additional functionality for managing officers.
+
 This edition adds the ability to increase level cap for individual ~~waifus~~officers using storypoints.
+
 Will probably die out soon as I'm looking for ways to make this a submod of OE rather than a fork.
 
 ## Manage more officers
