@@ -2,7 +2,7 @@
   "id": "officerExtension",
   "name": "Officer Extension - The OP Fork",
   "author": "qcwxezda, fork by 5thYL",
-  "version": "OEOPA.00",
+  "version": "OPF.00",
   "dependencies": [],
   "utility": true,
   "description": "Based on original OE, adds the ability to increase officer level cap for story points.",
