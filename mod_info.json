@@ -1,12 +1,12 @@
 {
   "id": "officerExtension",
-  "name": "Officer Extension",
-  "author": "qcwxezda",
-  "version": {"major":0, "minor":5, "patch":0},
+  "name": "Officer Extension - OP Addon",
+  "author": "qcwxezda, addon by 5thYL",
+  "version": "OEOPA.00",
   "dependencies": [],
   "utility": true,
-  "description": "Offers a variety of enhancements to officer management and the officer selection interface.",
-  "gameVersion": "0.96a-RC6",
+  "description": "Based on original OE, adds the ability to increase officer level cap for story points.",
+  "gameVersion": "0.96a-RC10",
   "jars": ["jars/Officer Extension.jar"],
   "modPlugin": "officerextension.plugin.OfficerExtension"
 }
