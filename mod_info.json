@@ -1,7 +1,7 @@
 {
   "id": "officerExtension",
-  "name": "Officer Extension - OP Addon",
-  "author": "qcwxezda, addon by 5thYL",
+  "name": "Officer Extension - The OP Fork",
+  "author": "qcwxezda, fork by 5thYL",
   "version": "OEOPA.00",
   "dependencies": [],
   "utility": true,
