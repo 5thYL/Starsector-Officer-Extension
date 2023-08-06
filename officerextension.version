@@ -6,7 +6,8 @@
   {
 		"major":0,
 		"minor":0,
-        "patch":.OPF.01
+        "patch":.OPF.02
   },
-  "directDownloadURL": "https://github.com/5thYL/Starsector-Officer-Extension/releases/download/R.01/OfficerExtensionOPFork.zip"
+  "directDownloadURL": "https://github.com/5thYL/Starsector-Officer-Extension/releases/download/R.02/OfficerExtensionOPFork.zip"
+  "changelogURL": "https://raw.githubusercontent.com/5thYL/Starsector-Officer-Extension/main/officerextension.changelog"
 }
