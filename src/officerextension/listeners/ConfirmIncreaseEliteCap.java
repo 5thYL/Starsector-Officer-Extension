@@ -6,12 +6,12 @@ import com.fs.starfarer.api.plugins.OfficerLevelupPlugin;
 import officerextension.Settings;
 import officerextension.ui.OfficerUIElement;
 
-public class ConfirmIncreaseLevelCap extends DialogDismissedListener {
+public class ConfirmIncreaseEliteCap extends DialogDismissedListener {
 
     private final OfficerUIElement uiElement;
     private final OfficerDataAPI officerData;
 
-    public ConfirmIncreaseLevelCap(OfficerUIElement uiElement) {
+    public ConfirmIncreaseEliteCap(OfficerUIElement uiElement) {
         this.uiElement = uiElement;
         this.officerData = uiElement.getOfficerData();
     }
@@ -26,7 +26,7 @@ public class ConfirmIncreaseLevelCap extends DialogDismissedListener {
         // Have to do the check again here, since the player can press space bar to confirm despite
         // the confirm button being disabled
         OfficerLevelupPlugin levelUpPlugin = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
-        int currentMaximum = levelUpPlugin.getMaxLevel(officerData.getPerson());
+        int currentMaximum = levelUpPlugin.getMaxEliteSkills(officerData.getPerson());
         int newMaximum = currentMaximum + 1;
         if (Global.getSector().getPlayerStats().getStoryPoints() < currentMaximum) {
             return;
@@ -38,11 +38,11 @@ public class ConfirmIncreaseLevelCap extends DialogDismissedListener {
                     true,
                     null,
                     true,
-                    Settings.INCREASE_LEVEL_CAP_BONUS_XP_FRACTION,
-                    "Increased Officer Level Cap: " + officerData.getPerson().getNameString());
+                    Settings.INCREASE_ELITE_CAP_BONUS_XP_FRACTION,
+                    "Increased Officer Elite Skill Cap: " + officerData.getPerson().getNameString());
         }
 
-        officerData.getPerson().getMemoryWithoutUpdate().set(Settings.OFFICER_LEVEL_CAP, newMaximum);
+        officerData.getPerson().getMemoryWithoutUpdate().set(Settings.OFFICER_ELITE_CAP, newMaximum);
         uiElement.recreate();
 
     }

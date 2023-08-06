@@ -2,36 +2,29 @@ package officerextension.listeners;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.characters.SkillSpecAPI;
+import com.fs.starfarer.api.plugins.OfficerLevelupPlugin;
 import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.util.Misc;
 import officerextension.Settings;
 import officerextension.UtilReflection;
 import officerextension.ui.Button;
 import officerextension.ui.OfficerUIElement;
-import officerextension.ui.SkillButton;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForgetSkills extends ActionListener {
+public class IncreaseEliteCap extends ActionListener {
 
     private final OfficerUIElement uiElement;
 
-    public ForgetSkills(OfficerUIElement uiElement) {
+    public IncreaseEliteCap(OfficerUIElement uiElement) {
         this.uiElement = uiElement;
     }
 
     @Override
     public void trigger(Object... args) {
         PersonAPI officerPerson = uiElement.getOfficerData().getPerson();
-        int numForgetting = 0;
-        for (SkillButton button : uiElement.getWrappedSkillButtons()) {
-            if (button.isSelected()) {
-                numForgetting++;
-            }
-        }
         StringBuilder confirmSB = new StringBuilder();
         List<String> highlights = new ArrayList<>();
         List<Color> colors = new ArrayList<>();
@@ -39,34 +32,21 @@ public class ForgetSkills extends ActionListener {
                 .append(officerPerson.getNameString())
                 .append(" (level ")
                 .append(officerPerson.getStats().getLevel())
-                .append(") will be demoted to level ")
-                .append(officerPerson.getStats().getLevel() - numForgetting)
-                .append(" and will forget the following skills: \n\n");
-        for (SkillButton button : uiElement.getWrappedSkillButtons()) {
-            if (button.isSelected()) {
-                SkillSpecAPI spec = button.getSkillSpec();
-                confirmSB.append("        - ")
-                        .append(spec.getName());
-                highlights.add(spec.getName());
-                colors.add(spec.getGoverningAptitudeColor());
-                if (officerPerson.getStats().getSkillLevel(button.getSkillSpec().getId()) > 1) {
-                    confirmSB.append(" (elite)");
-                    highlights.add("(elite)");
-                    colors.add(Misc.getStoryOptionColor());
-                }
-                confirmSB.append("\n");
-            }
-        }
-        String bonusXPPercent = (int) (100f * Settings.DEMOTE_BONUS_XP_FRACTION) + "%";
+                .append(") will have their elite skill cap increased by 1.");
+        String bonusXPPercent = (int) (100f * Settings.INCREASE_ELITE_CAP_BONUS_XP_FRACTION) + "%";
         int numStoryPoints = Global.getSector().getPlayerStats().getStoryPoints();
-        int costStoryPoints = Settings.DEMOTE_OFFICER_SP_COST;
+        OfficerLevelupPlugin levelUpPlugin = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
+        int currentMaximum = levelUpPlugin.getMaxEliteSkills(officerPerson);
         String storyPointOrPointsPlayer = numStoryPoints == 1 ? "story point" : "story points";
-        String storyPointOrPointsCost = costStoryPoints == 1 ? "story point" : "story points";
-        confirmSB.append("\n")
-                .append("Demoting an officer costs ")
-                .append(costStoryPoints)
+        String storyPointOrPointsCost = currentMaximum == 1 ? "story point" : "story points";
+        confirmSB.append("\n\n")
+                .append("Increasing elite skill cap by 1 costs ")
+                .append(currentMaximum)
                 .append(" ")
                 .append(storyPointOrPointsCost)
+                .append(" due to their current elite skill cap of")
+                .append(" ")
+                .append(currentMaximum)
                 .append(" and grants ")
                 .append(bonusXPPercent)
                 .append(" bonus experience.\n\n")
@@ -75,19 +55,21 @@ public class ForgetSkills extends ActionListener {
                 .append(" ")
                 .append(storyPointOrPointsPlayer)
                 .append(".");
-        highlights.add(costStoryPoints + " " + storyPointOrPointsCost);
+        highlights.add(currentMaximum + " " + storyPointOrPointsCost);
+        colors.add(Misc.getStoryOptionColor());
+        highlights.add("" + currentMaximum);
         colors.add(Misc.getStoryOptionColor());
         highlights.add(bonusXPPercent);
         colors.add(Misc.getStoryOptionColor());
         highlights.add("" + numStoryPoints);
-        colors.add(numStoryPoints >= Settings.DEMOTE_OFFICER_SP_COST ? Misc.getStoryOptionColor() : Misc.getNegativeHighlightColor());
-        ConfirmForgetSkills confirmListener = new ConfirmForgetSkills(uiElement);
+        colors.add(numStoryPoints >= currentMaximum ? Misc.getStoryOptionColor() : Misc.getNegativeHighlightColor());
+        ConfirmIncreaseEliteCap confirmListener = new ConfirmIncreaseEliteCap(uiElement);
         UtilReflection.ConfirmDialogData data = UtilReflection.showConfirmationDialog(
                 confirmSB.toString(),
-                "Demote",
+                "Increase Cap",
                 "Never mind",
                 650f,
-                230f + 20f * numForgetting,
+                230f,
                 confirmListener);
         if (data == null) {
             return;
@@ -96,7 +78,7 @@ public class ForgetSkills extends ActionListener {
         label.setHighlight(highlights.toArray(new String[0]));
         label.setHighlightColors(colors.toArray(new Color[0]));
         Button yesButton = data.confirmButton;
-        if (numStoryPoints < Settings.DEMOTE_OFFICER_SP_COST) {
+        if (numStoryPoints < currentMaximum) {
             yesButton.setEnabled(false);
         }
     }

@@ -12,7 +12,7 @@ Since I'm literally just a copy and paste bot when it comes to modding, this for
 
 - float for the original mod, of course! [At least that's what they're called on the forum]
 - ruddygreat for working out the basics of modding with me
-- Lukas04 for the enlightments into the depths of SS reflections
+- Lukas04 for the enlightments into the depths of SS reflections and help on skills
 - AtlanticAccent for working through a ton of stuff with me that I can write a book on probably, also the conversations kept me sane
 - Starficz for the life saving Intelli search hotkeys
 - AERO for recommending me to do a submod instead of a fork

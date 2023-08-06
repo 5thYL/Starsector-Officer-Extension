@@ -1,6 +1,7 @@
 package officerextension.ui;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.OfficerDataAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.plugins.OfficerLevelupPlugin;
@@ -12,6 +13,7 @@ import officerextension.CoreScript;
 import officerextension.Settings;
 import officerextension.Util;
 import officerextension.UtilReflection;
+import com.fs.starfarer.api.util.Misc;
 
 import java.lang.reflect.*;
 import java.util.List;
@@ -24,6 +26,7 @@ public class OfficerUIElement extends UIPanel {
     private Button suspendButton;
     private Button reinstateButton;
     private Button increaseLevelCapButton;
+    private Button increaseEliteCapButton;
     private List<SkillButton> wrappedSkillButtons;
     private final CoreScript injector;
 
@@ -185,7 +188,11 @@ public class OfficerUIElement extends UIPanel {
 
     public void setIncreaseLevelCapButton(Button button) { increaseLevelCapButton = button; }
 
+    public void setIncreaseEliteCapButton(Button button) { increaseEliteCapButton = button; }
+
     public Button getIncreaseLevelCapButtonButton() { return increaseLevelCapButton; }
+
+    public Button getIncreaseEliteCapButtonButton() { return increaseEliteCapButton; }
 
     public List<SkillButton> getWrappedSkillButtons() {
         return wrappedSkillButtons;
@@ -367,13 +374,25 @@ public class OfficerUIElement extends UIPanel {
             getReinstateButton().setOpacity(0f);
         }
         OfficerLevelupPlugin levelUpPlugin = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
-        //If officer is not at maximum level, do not show increase level cap button
+        //Only show increase level cap button if officer current level is at or above maximum level and has vanilla skills to level up with
         if(getOfficerData().getPerson().getStats().getLevel() >= levelUpPlugin.getMaxLevel(getOfficerData().getPerson())
-        && levelUpPlugin.getMaxLevel(getOfficerData().getPerson()) < Settings.ARBITRARY_LEVEL_CAP){
+        && checkCanPickSkill(getOfficerData())){
             getIncreaseLevelCapButtonButton().setOpacity(1f);
         }
         else {
             getIncreaseLevelCapButtonButton().setOpacity(0f);
+        }
+
+        //Only show increase elite cap button if officer current elite skills is equal to or above maximum elite skills
+        //and current skill count is greater than both current and maximum elite skills
+        //Not checking for if the officer is at max elite skills because that's likely impossible with mods that introduce new skills
+        if(Misc.getNumEliteSkills(getOfficerData().getPerson()) >= levelUpPlugin.getMaxEliteSkills(getOfficerData().getPerson())
+        && getOfficerSkillsCount(getOfficerData()) > Misc.getNumEliteSkills(getOfficerData().getPerson())
+        && getOfficerSkillsCount(getOfficerData()) > levelUpPlugin.getMaxEliteSkills(getOfficerData().getPerson())){
+            getIncreaseEliteCapButtonButton().setOpacity(1f);
+        }
+        else {
+            getIncreaseEliteCapButtonButton().setOpacity(0f);
         }
     }
 
@@ -426,5 +445,28 @@ public class OfficerUIElement extends UIPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //Checks if there is an officer skill that is not within the current skills
+    public boolean checkCanPickSkill(OfficerDataAPI officer){
+        MutableCharacterStatsAPI currentOfficer = officer.getPerson().getStats();
+        for(String id : Settings.LEARNABLE_OFFICER_SKILLS){
+            if(!currentOfficer.hasSkill(id)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Checks the current number of officer combat skills on officer
+    public int getOfficerSkillsCount(OfficerDataAPI officer){
+        MutableCharacterStatsAPI currentOfficer = officer.getPerson().getStats();
+        int skillsCount = 0;
+        for(String id : Settings.OFFICER_SKILLS){
+            if(currentOfficer.hasSkill(id)){
+                skillsCount++;
+            }
+        }
+        return skillsCount;
     }
 }

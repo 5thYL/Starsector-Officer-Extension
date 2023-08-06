@@ -6,14 +6,14 @@
   "demoteOfficerSPCost": 1,
 
   # Fraction of bonus XP granted when spending a story point to demote an officer
-  "demoteOfficerBonusXPFraction": 1,  
-  
-  # Here so that people don't mistakenly overlevel their officers the level up button blocks other OE features
-  "arbitraryLevelCap": 14,
-  
-  # How much bonus XP is granted for using sp to increase officer level cap, should be 0 as it's a cost
+  "demoteOfficerBonusXPFraction": 1,
+
+  # How much bonus XP is granted for using sp to increase officer level cap, should be 0 as it is a cost
   "increaseLevelCapBonusXPFraction": 0,
-  
+
+  # How much bonus XP is granted for using sp to increase officer elite skills cap, should be 0 as it is a cost
+  "increaseEliteCapBonusXPFraction": 0,
+
   # Fee to suspended an officer, as a multiplier on top of their salary
   "suspendOfficerCostMultiplier": 12,
 

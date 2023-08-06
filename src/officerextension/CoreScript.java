@@ -341,6 +341,7 @@ public class CoreScript implements EveryFrameScript {
         insertEditTagsButton(elem);
 
         insertIncreaseLevelCapButton(elem);
+        insertIncreaseEliteCapButton(elem);
 
         elem.getDismissButton().setListener(new DismissOfficer(elem));
 
@@ -401,15 +402,28 @@ public class CoreScript implements EveryFrameScript {
         );
     }
 
-    /** Adds and overlays the "Increase Level Cap" button on top of the "Mentor" button. */
+    /** Adds and overlays the "Increase Level Cap" button on top of the "Mentor" button on the left. */
     private void insertIncreaseLevelCapButton(OfficerUIElement elem) {
         elem.setIncreaseLevelCapButton(
-                insertButtonOnTopOfMentor(
+                insertButtonOnTopOfMentorLeft(
                         elem,
-                        "Increase Level Cap",
+                        "Lv. Cap",
                         Misc.getStoryOptionColor(),
                         Misc.getStoryDarkColor(),
                         new IncreaseLevelCap(elem)
+                )
+        );
+    }
+
+    /** Adds and overlays the "Increase Level Cap" button on top of the "Mentor" button on the left. */
+    private void insertIncreaseEliteCapButton(OfficerUIElement elem) {
+        elem.setIncreaseEliteCapButton(
+                insertButtonOnTopOfMentorRight(
+                        elem,
+                        "Elite Cap",
+                        Misc.getStoryOptionColor(),
+                        Misc.getStoryDarkColor(),
+                        new IncreaseEliteCap(elem)
                 )
         );
     }
@@ -450,8 +464,21 @@ public class CoreScript implements EveryFrameScript {
         return insertButtonAtPosition(elem, text, base, bg, listener, 100f, 20f,110f, 7f);
     }
 
+/*
+    /**Overlays the specified button on top of the "Mentor" button.* /
     private Button insertButtonOnTopOfMentor(OfficerUIElement elem, String text, Color base, Color bg, ActionListener listener) {
         return insertButtonAtPosition(elem, text, base, bg, listener, 203f, 20f,7f, 80f);
+    }
+*/
+
+    /** Overlays the small button on top of the "Mentor" button on the left.*/
+    private Button insertButtonOnTopOfMentorLeft(OfficerUIElement elem, String text, Color base, Color bg, ActionListener listener) {
+        return insertButtonAtPosition(elem, text, base, bg, listener, 86f, 16f,7f, 79f);
+    }
+
+    /** Overlays the small button on top of the "Mentor" button on the right.*/
+    private Button insertButtonOnTopOfMentorRight(OfficerUIElement elem, String text, Color base, Color bg, ActionListener listener) {
+        return insertButtonAtPosition(elem, text, base, bg, listener, 86f, 16f,7f, 97f);
     }
 
     private CaptainPickerDialog findCaptainPickerDialog() {
@@ -547,4 +574,5 @@ public class CoreScript implements EveryFrameScript {
     public Map<OfficerFilter, OfficerFilter> getActiveFilters() {
         return activeFilters;
     }
+
 }

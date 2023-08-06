@@ -30,7 +30,18 @@ public class CryopodAwareOfficerLevelUpPlugin extends OfficerLevelupPluginImpl {
     @Override
     public int getMaxEliteSkills(PersonAPI person) {
         if (person != null && person.getMemoryWithoutUpdate().getBoolean(MemFlags.EXCEPTIONAL_SLEEPER_POD_OFFICER)) {
-            return Global.getSettings().getInt("exceptionalSleeperPodsOfficerEliteSkills");
+            if (person.getMemoryWithoutUpdate().getInt(Settings.OFFICER_ELITE_CAP) <= Global.getSettings().getInt("exceptionalSleeperPodsOfficerEliteSkills")) {
+                return Global.getSettings().getInt("exceptionalSleeperPodsOfficerEliteSkills");
+            }
+            if (person.getMemoryWithoutUpdate().getInt(Settings.OFFICER_ELITE_CAP) > Global.getSettings().getInt("exceptionalSleeperPodsOfficerEliteSkills")) {
+                return person.getMemoryWithoutUpdate().getInt(Settings.OFFICER_ELITE_CAP);
+            }
+        }
+        if (person != null && person.getMemoryWithoutUpdate().getInt(Settings.OFFICER_ELITE_CAP) <= super.getMaxEliteSkills(person)) {
+            return super.getMaxEliteSkills(person);
+        }
+        if (person != null && person.getMemoryWithoutUpdate().getInt(Settings.OFFICER_ELITE_CAP) > super.getMaxEliteSkills(person)) {
+            return person.getMemoryWithoutUpdate().getInt(Settings.OFFICER_ELITE_CAP);
         }
         return super.getMaxEliteSkills(person);
     }
