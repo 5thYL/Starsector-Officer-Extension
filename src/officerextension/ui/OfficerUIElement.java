@@ -388,7 +388,8 @@ public class OfficerUIElement extends UIPanel {
         //Not checking for if the officer is at max elite skills because that's likely impossible with mods that introduce new skills
         if(Misc.getNumEliteSkills(getOfficerData().getPerson()) >= levelUpPlugin.getMaxEliteSkills(getOfficerData().getPerson())
         && getOfficerSkillsCount(getOfficerData()) > Misc.getNumEliteSkills(getOfficerData().getPerson())
-        && getOfficerSkillsCount(getOfficerData()) > levelUpPlugin.getMaxEliteSkills(getOfficerData().getPerson())){
+        && getOfficerSkillsCount(getOfficerData()) > levelUpPlugin.getMaxEliteSkills(getOfficerData().getPerson())
+        && getOfficerData().getPerson().getStats().getLevel() >= levelUpPlugin.getMaxLevel(getOfficerData().getPerson())){
             getIncreaseEliteCapButtonButton().setOpacity(1f);
         }
         else {
