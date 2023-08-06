@@ -4,7 +4,9 @@
   "modThreadId": 27754,
   "modVersion":
   {
-        "OPF.01"
+		"major":0,
+		"minor":0,
+        "patch":OPF.01
   },
   "directDownloadURL": "https://github.com/5thYL/Starsector-Officer-Extension/releases/download/R.01/OfficerExtensionOPFork.zip"
 }
